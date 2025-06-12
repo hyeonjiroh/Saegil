@@ -14,7 +14,10 @@ export default function QuestionContainer({
 }) {
   return (
     <div className="flex justify-between flex-col gap-[32px] md:gap-[48px] xl:gap-[64px] max-w-[800px] w-[80%]">
-      <QuestionInfo title={question.title} contents={question.contents} />
+      <QuestionInfo
+        title={question?.title ?? "제목 없음"}
+        contents={question?.contents ?? "내용 없음"}
+      />
       <QuestionItemList
         items={question.items}
         selectedData={selectedData}
