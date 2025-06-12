@@ -7,7 +7,7 @@ export default function QuestionItemList({
 }) {
   return (
     <div className="flex flex-col justify-between gap-[8px] md:gap-[10px] xl:gap-[12px]">
-      {items.map((item) => (
+      {items?.map((item) => (
         <QuestionItem
           key={item}
           item={item}
