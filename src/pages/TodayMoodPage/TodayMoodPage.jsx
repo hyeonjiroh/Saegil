@@ -36,7 +36,9 @@ export default function TodayMoodPage({ routing }) {
     const updatedAnswers = [...answers];
     updatedAnswers[currentQuestion] = answer;
 
-    localStorage.setItem("todayMoodAnswers", JSON.stringify(updatedAnswers));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("todayMoodAnswers", JSON.stringify(updatedAnswers));
+    }
     setAnswers(updatedAnswers);
     handleProgress(updatedAnswers);
 
@@ -90,10 +92,7 @@ export default function TodayMoodPage({ routing }) {
         </div>
         <div className="flex flex-col justify-between gap-[12px] w-[700px]">
           {questionData[currentQuestion].items.map((item) => {
-            const todayMoodAnswers = JSON.parse(
-              localStorage.getItem("todayMoodAnswers")
-            );
-            if (item === todayMoodAnswers[currentQuestion]) {
+            if (item === answers[currentQuestion]) {
               return (
                 <div
                   className="flex justify-between items-center pl-[22px] pr-[38px] py-[14px] bg-[#F7F9FD] border-[2px] border-[#577DD1] rounded-[12px]"
