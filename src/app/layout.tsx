@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script"; // ✅ 꼭 추가
 
 import "./globals.css";
 
@@ -14,11 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=VqMhcfR29p90wnyQM6IsS9jccnNyJfQF0DVa6do7"></script>
-      </head>
+      <head />
       <body>
+        <Script
+          src="https://code.jquery.com/jquery-3.2.1.min.js"
+          strategy="beforeInteractive"
+        />
+        <Script
+          src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=VqMhcfR29p90wnyQM6IsS9jccnNyJfQF0DVa6do7"
+          strategy="beforeInteractive"
+        />
         <div className="--font-pretendard">{children}</div>
       </body>
     </html>
