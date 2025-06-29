@@ -16,8 +16,14 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=VqMhcfR29p90wnyQM6IsS9jccnNyJfQF0DVa6do7"></script>
+        <script
+          src="https://code.jquery.com/jquery-3.2.1.min.js"
+          defer
+        ></script>
+        <script
+          src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=VqMhcfR29p90wnyQM6IsS9jccnNyJfQF0DVa6do7"
+          defer
+        ></script>
         <div className="--font-pretendard">{children}</div>
       </body>
     </html>
