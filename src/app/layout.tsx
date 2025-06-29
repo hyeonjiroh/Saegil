@@ -22,8 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pretendard.variable} font-pretendard`}>
-        {children}
+      <head>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=VqMhcfR29p90wnyQM6IsS9jccnNyJfQF0DVa6do7"></script>
+      </head>
+      <body>
+        <div className="--font-pretendard">{children}</div>
       </body>
     </html>
   );

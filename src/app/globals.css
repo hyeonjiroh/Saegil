@@ -1,10 +1,26 @@
 @import "tailwindcss";
 
-h2,
-p,
-button {
+body {
   font-family: "Pretendard Variable", Pretendard, -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+.scrollbar-overlay {
+  scrollbar-width: thin;
+  scrollbar-color: auto transparent;
+}
+
+.scrollbar-overlay::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-overlay::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-overlay::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
