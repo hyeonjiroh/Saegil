@@ -1,47 +1,35 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
-const { Tmapv2 } = window;
-console.log(window);
 
 export default function TmapDirections() {
   const mapRef = useRef(null);
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
 
-  // Tmap JS API 로딩 및 지도 초기화
   useEffect(() => {
-    // 이미 로드된 상태라면 바로 initMap 호출
+    if (typeof window === "undefined") return;
+
     if (window.Tmapv2) {
       initMap();
       return;
     }
 
-    // 스크립트 로드가 진행 중이면 이벤트 리스너 등록
     const existingScript = document.querySelector('script[src*="tmap/js"]');
     if (existingScript) {
-      existingScript.addEventListener("load", () => {
-        initMap();
-      });
+      existingScript.addEventListener("load", initMap);
       return;
-    } // 스크립트 없으면 새로 추가
+    }
+
     const script = document.createElement("script");
     script.src =
       "https://apis.openapi.sk.com/tmap/js?version=1&appKey=VqMhcfR29p90wnyQM6IsS9jccnNyJfQF0DVa6do7";
     script.async = true;
-    script.onload = () => {
-      initMap();
-    };
+    script.onload = initMap;
     document.head.appendChild(script);
   }, []);
 
-  // 지도 초기화 함수
   const initMap = () => {
-    if (!window.Tmapv2) {
-      console.error("Tmapv2 라이브러리를 불러오지 못했습니다.");
-      return;
-    }
-    if (mapRef.current) return;
+    if (!window.Tmapv2 || mapRef.current) return;
+
     const map = new window.Tmapv2.Map("map_div", {
       center: new window.Tmapv2.LatLng(37.570028, 126.989072),
       width: "100%",
@@ -51,7 +39,6 @@ export default function TmapDirections() {
     mapRef.current = map;
   };
 
-  // 주소를 좌표로 변환하는 함수
   const geocode = async (address) => {
     const url = `https://apis.openapi.sk.com/tmap/geo/fullAddrGeo?version=1&format=json&appKey=VqMhcfR29p90wnyQM6IsS9jccnNyJfQF0DVa6do7&fullAddr=${encodeURIComponent(
       address
@@ -80,7 +67,6 @@ export default function TmapDirections() {
     }
   };
 
-  // 길찾기 버튼 클릭 핸들러
   const handleSearch = async () => {
     if (!start || !end) {
       alert("출발지와 도착지를 입력해주세요.");
@@ -96,7 +82,6 @@ export default function TmapDirections() {
     drawRoute(startCoord, endCoord);
   };
 
-  // 길찾기 경로 요청 및 지도에 경로 그리기
   const drawRoute = async (startCoord, endCoord) => {
     if (!window.Tmapv2) {
       console.log(window);
