@@ -55,13 +55,15 @@ export default function TodayMoodPage({ routing }) {
 
     const payload = {
       clientId: USID,
-      age: onboardingAnswers[0],
+      age: Number(onboardingAnswers[0].substr(0, 2)),
       gender: onboardingAnswers[1],
       resident: onboardingAnswers[2],
       city: onboardingAnswers[3],
       want: onboardingAnswers[5],
       mood: onboardingAnswers[6],
     };
+
+    console.log(payload);
 
     if (true) {
       try {
