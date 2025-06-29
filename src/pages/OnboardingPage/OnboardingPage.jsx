@@ -35,7 +35,10 @@ export default function OnboardingPage({ routing }) {
     const updatedAnswers = [...answers];
     updatedAnswers[currentQuestion] = answer;
 
-    localStorage.setItem("onboardingAnswers", JSON.stringify(updatedAnswers));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("onboardingAnswers", JSON.stringify(updatedAnswers));
+    }
+
     setAnswers(updatedAnswers);
     handleProgress(updatedAnswers);
 
@@ -71,10 +74,7 @@ export default function OnboardingPage({ routing }) {
         </div>
         <div className="flex flex-col justify-between gap-[12px] w-[700px]">
           {questionData[currentQuestion].items.map((item, index) => {
-            const onboardingAnswers = JSON.parse(
-              localStorage.getItem("onboardingAnswers")
-            );
-            if (item === onboardingAnswers[currentQuestion]) {
+            if (item === answers[currentQuestion]) {
               return (
                 <div
                   key={index}
