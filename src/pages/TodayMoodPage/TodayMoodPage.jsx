@@ -69,7 +69,7 @@ export default function TodayMoodPage({ routing }) {
           "https://saegil.store/api/survey/recommendation",
           payload
         );
-        console.log("추천길 결과:", response.data);
+        localStorage.setItem("spaceDatas", JSON.stringify(response.data));
         routing("LandingPage3");
       } catch (error) {
         console.error("추천 API 호출 실패:", error);

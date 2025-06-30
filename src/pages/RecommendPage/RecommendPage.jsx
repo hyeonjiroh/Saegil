@@ -8,13 +8,14 @@ import Pin from "@/assets/icons/pin.png";
 import Temp from "@/assets/icons/temp.jpg";
 import MapPin from "@/assets/icons/map_pin.png";
 import ChevronLeft from "@/assets/icons/chevron-left.png";
-import tempSpaceData from "@/constants/tempSpaceData";
 
 const category = {
   TOUR: "여행",
   CULTURE: "문화",
   FESTIVAL: "축제",
 };
+
+const spaceDatas = JSON.parse(localStorage.getItem("spaceDatas")) || [];
 
 export default function RecommendPage({ routing }) {
   return (
@@ -69,7 +70,7 @@ function SideMenuRecommend() {
         </p>
       </div>
       <div className="flex flex-wrap gap-[20px] w-[690px] overflow-x-auto scrollbar-overlay">
-        {tempSpaceData.map((spaceData, index) => (
+        {spaceDatas.map((spaceData, index) => (
           <SpaceCard key={index} spaceData={spaceData} />
         ))}
       </div>
