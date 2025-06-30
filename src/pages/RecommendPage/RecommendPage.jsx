@@ -34,7 +34,7 @@ export default function RecommendPage({ routing }) {
       </button>
       <section className="flex">
         <SideMenu />
-        <SideMenuRecommend />
+        <SideMenuRecommend spaceDatas={spaceDatas} />
       </section>
     </div>
   );
@@ -58,7 +58,7 @@ function SideMenu() {
   );
 }
 
-function SideMenuRecommend() {
+function SideMenuRecommend({ spaceDatas }) {
   return (
     <div className="relative flex flex-col gap-[40px] w-[750px] h-screen rounded-tr-[20px] rounded-br-[20px] pl-[40px] pr-[20px] py-[40px] bg-[#FFFFFF]">
       <div className="absolute bg-[#FFFFFF] rounded-[9px] w-[40px] h-[40px] right-[-20px] top-[150px] p-[6px]">
