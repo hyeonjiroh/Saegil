@@ -16,9 +16,16 @@ const category = {
   FESTIVAL: "축제",
 };
 
-export default function RecommendPage() {
+export default function RecommendPage({ routing }) {
   return (
     <div className="bg-[#0000FF]">
+      <button
+        onClick={() => {
+          routing("PopupTestPage");
+        }}
+      >
+        만족도 팝업 테스트 화면으로 이동
+      </button>
       <section className="flex">
         <SideMenu />
         <SideMenuRecommend />

@@ -63,8 +63,6 @@ export default function TodayMoodPage({ routing }) {
       mood: onboardingAnswers[6],
     };
 
-    console.log(payload);
-
     if (true) {
       try {
         const response = await axios.post(

@@ -7,6 +7,7 @@ import LandingPage3 from "../pages/LandingPage3/LandingPage3";
 import OnboardingPage from "../pages/OnboardingPage/OnboardingPage";
 import TodayMoodPage from "../pages/TodayMoodPage/TodayMoodPage";
 import RecommendPage from "../pages/RecommendPage/RecommendPage";
+import PopupTestPage from "../pages/PopupTestPage/PopupTestPage";
 import { useState } from "react";
 
 export default function Home() {
@@ -22,7 +23,8 @@ export default function Home() {
     LandingPage3: () => <LandingPage3 routing={handleRouting} />,
     OnboardingPage: () => <OnboardingPage routing={handleRouting} />,
     TodayMoodPage: () => <TodayMoodPage routing={handleRouting} />,
-    RecommendPage: () => <RecommendPage />,
+    PopupTestPage: () => <PopupTestPage routing={handleRouting} />,
+    RecommendPage: () => <RecommendPage routing={handleRouting} />,
   };
 
   return <div>{pageMapping[currentPage]?.()}</div>;
