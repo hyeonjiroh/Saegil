@@ -8,6 +8,7 @@ import Pin from "@/assets/icons/pin.png";
 import Temp from "@/assets/icons/temp.jpg";
 import MapPin from "@/assets/icons/map_pin.png";
 import ChevronLeft from "@/assets/icons/chevron-left.png";
+import { useEffect, useState } from "react";
 
 const category = {
   TOUR: "여행",
@@ -15,9 +16,13 @@ const category = {
   FESTIVAL: "축제",
 };
 
-const spaceDatas = JSON.parse(localStorage.getItem("spaceDatas")) || [];
-
 export default function RecommendPage({ routing }) {
+  const [spaceDatas, setSpaceDatas] = useState([]);
+
+  useEffect(() => {
+    setSpaceDatas(JSON.parse(localStorage.getItem("spaceDatas")) || []);
+  }, []);
+
   return (
     <div className="bg-[#0000FF]">
       <button
