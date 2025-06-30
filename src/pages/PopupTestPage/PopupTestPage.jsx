@@ -31,7 +31,7 @@ export default function PopupTestPage({ routing }) {
 
     if (true) {
       try {
-        const response = await axios.post(
+        const response = await axios.patch(
           "https://saegil.store/api/survey/update",
           payload
         );
