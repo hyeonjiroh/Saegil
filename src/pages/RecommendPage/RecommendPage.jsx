@@ -154,23 +154,3 @@ function getCity(position) {
   }
   return null;
 }
-
-function KakaoMap() {
-  const mapRef = useRef(null);
-
-  useEffect(() => {
-    console.log(window.kakao);
-    if (typeof window !== "undefined" && window.kakao && mapRef.current) {
-      window.kakao.maps.load(() => {
-        const container = mapRef.current;
-        const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.978), // 서울 시청 좌표
-          level: 3,
-        };
-        new window.kakao.maps.Map(container, options);
-      });
-    }
-  }, []);
-
-  return <div ref={mapRef} style={{ width: "100%", height: "400px" }} />;
-}
