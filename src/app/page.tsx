@@ -11,7 +11,7 @@ import PopupTestPage from "../pages/PopupTestPage/PopupTestPage";
 import { useState } from "react";
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState("LandingPage");
+  const [currentPage, setCurrentPage] = useState("RecommendPage");
 
   const handleRouting = (page: string) => {
     setCurrentPage(page);

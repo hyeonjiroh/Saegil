@@ -8,7 +8,9 @@ import Pin from "@/assets/icons/pin.png";
 import Temp from "@/assets/icons/temp.jpg";
 import MapPin from "@/assets/icons/map_pin.png";
 import ChevronLeft from "@/assets/icons/chevron-left.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import useKakaoLoader from "@/components/UseKakaoLoader.jsx";
 
 const category = {
   TOUR: "여행",
@@ -17,6 +19,7 @@ const category = {
 };
 
 export default function RecommendPage({ routing }) {
+  useKakaoLoader();
   const [spaceDatas, setSpaceDatas] = useState([]);
 
   useEffect(() => {
@@ -24,7 +27,7 @@ export default function RecommendPage({ routing }) {
   }, []);
 
   return (
-    <div className="bg-[#0000FF]">
+    <div className="bg-[#FFFFFF] h-screen overflow-hidden ">
       <button
         onClick={() => {
           routing("PopupTestPage");
@@ -32,17 +35,38 @@ export default function RecommendPage({ routing }) {
       >
         만족도 팝업 테스트 화면으로 이동
       </button>
-      <section className="flex">
-        <SideMenu />
-        <SideMenuRecommend spaceDatas={spaceDatas} />
-      </section>
+      <div className="flex">
+        <div className="flex">
+          <SideMenu />
+          <SideMenuRecommend spaceDatas={spaceDatas} />
+        </div>
+        <Map
+          id="map"
+          center={{
+            lat: 35.82,
+            lng: 126.59,
+          }}
+          style={{
+            width: "100%",
+            height: "100vh",
+          }}
+          level={9}
+        >
+          <MapMarker
+            position={{
+              lat: 35.82,
+              lng: 126.589072,
+            }}
+          ></MapMarker>
+        </Map>
+      </div>
     </div>
   );
 }
 
 function SideMenu() {
   return (
-    <div className="flex flex-col justify-between items-center w-[72px] h-screen pt-[13px] border-r-1 border-[#EEEFF2] bg-[#FFFFFF]">
+    <div className="flex flex-col justify-between items-center w-[72px] h-screen overflow-hidden pt-[13px] border-r-1 border-[#EEEFF2] bg-[#FFFFFF]">
       <Image src={Logo} alt="" width={40} height={50} />
       <div className="flex flex-col justify-between items-center gap-[48px]">
         <div className="flex flex-col justify-between items-center gap-[8px] px-[12px] py-[12px]">
@@ -60,9 +84,9 @@ function SideMenu() {
 
 function SideMenuRecommend({ spaceDatas }) {
   return (
-    <div className="relative flex flex-col gap-[40px] w-[750px] h-screen rounded-tr-[20px] rounded-br-[20px] pl-[40px] pr-[20px] py-[40px] bg-[#FFFFFF]">
+    <div className="relative flex flex-col gap-[40px] w-[750px] h-screen overflow-hidden  rounded-tr-[20px] rounded-br-[20px] pl-[40px] pr-[20px] py-[40px] bg-[#FFFFFF]">
       <div className="absolute bg-[#FFFFFF] rounded-[9px] w-[40px] h-[40px] right-[-20px] top-[150px] p-[6px]">
-        <Image src={ChevronLeft} width={28} height={28} />
+        <Image src={ChevronLeft} alt="" width={28} height={28} />
       </div>
       <div className="flex flex-col gap-[16px]">
         <h2 className="text-[#1F2229] text-[24px] font-[700] leading-[150%]">
@@ -129,4 +153,24 @@ function getCity(position) {
     return "부안";
   }
   return null;
+}
+
+function KakaoMap() {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    console.log(window.kakao);
+    if (typeof window !== "undefined" && window.kakao && mapRef.current) {
+      window.kakao.maps.load(() => {
+        const container = mapRef.current;
+        const options = {
+          center: new window.kakao.maps.LatLng(37.5665, 126.978), // 서울 시청 좌표
+          level: 3,
+        };
+        new window.kakao.maps.Map(container, options);
+      });
+    }
+  }, []);
+
+  return <div ref={mapRef} style={{ width: "100%", height: "400px" }} />;
 }
